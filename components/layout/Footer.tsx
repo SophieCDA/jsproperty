@@ -46,22 +46,13 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/j.sproperty/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-or hover:bg-or/10 transition-all"
                 aria-label="Instagram"
               >
                 <Instagram size={18} className="text-gris-noble" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-or hover:bg-or/10 transition-all"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} className="text-gris-noble" />
               </a>
             </div>
           </div>

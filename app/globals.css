@@ -2,7 +2,7 @@
 /* Leaflet CSS */
 @import "leaflet/dist/leaflet.css";
 @import './biens/biens.css';
-
+@import './contact/contact.css';
 /* ==================== THEME INLINE ==================== */
 @theme inline {
   --color-noir: #0a0a0a;
