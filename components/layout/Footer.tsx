@@ -48,7 +48,7 @@ export function Footer() {
             {/* Social Links */}
             <div className="flex gap-3">
               <a
-                href="https://instagram.com/jsproperty"
+                href="https://www.instagram.com/j.sproperty/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-or hover:bg-or/10 transition-all group"
