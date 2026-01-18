@@ -8,8 +8,6 @@ import {
   Phone,
   Mail,
   Send,
-  User,
-  MessageSquare,
   Calendar,
   CheckCircle,
   AlertCircle,
@@ -27,6 +25,20 @@ interface FormData {
   message: string;
 }
 
+// Type de réponse API (correspond à ApiResponse<T> dans types/index.ts)
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
+  data?: {
+    inquiry_type: string;
+    reference: string;
+  };
+}
+
+// URL de l'API (à configurer via variable d'environnement)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
 export function PropertyContact({ property }: PropertyContactProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -39,6 +51,8 @@ export function PropertyContact({ property }: PropertyContactProps) {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [reference, setReference] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -82,16 +96,56 @@ export function PropertyContact({ property }: PropertyContactProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setApiError(null);
 
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-    // Simuler l'envoi (à remplacer par un vrai appel API)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Appel API réel - utilise property-inquiry car c'est une demande sur un bien
+      const response = await fetch(`${API_URL}/api/mail/property-inquiry`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // Données contact
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          message: formData.message,
+          
+          // Données du bien (IMPORTANT: on envoie la référence du bien)
+          propertyId: property.id,
+          property_reference: property.reference,
+          property_title: property.title,
+          property_type: property.type,
+          property_status: property.availability,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      const result: ApiResponse = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || result.message || "Une erreur est survenue");
+      }
+
+      // Succès
+      setReference(result.data?.reference || null);
+      setIsSubmitted(true);
+
+    } catch (error) {
+      console.error("Erreur lors de l'envoi:", error);
+      setApiError(
+        error instanceof Error 
+          ? error.message 
+          : "Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -99,10 +153,28 @@ export function PropertyContact({ property }: PropertyContactProps) {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
     // Effacer l'erreur quand l'utilisateur tape
     if (errors[name as keyof FormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+    
+    // Clear API error on change
+    if (apiError) {
+      setApiError(null);
+    }
+  };
+
+  const handleReset = () => {
+    setIsSubmitted(false);
+    setReference(null);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: `Bonjour,\n\nJe souhaite obtenir plus d'informations concernant le bien "${property.title}" (Réf. ${property.reference}).\n\nCordialement,`,
+    });
   };
 
   return (
@@ -151,11 +223,16 @@ export function PropertyContact({ property }: PropertyContactProps) {
               <h3 className="font-serif text-xl text-ivoire mb-3">
                 Message envoyé !
               </h3>
-              <p className="font-sans text-sm text-gris-clair mb-6">
+              <p className="font-sans text-sm text-gris-clair mb-4">
                 Notre équipe vous recontactera dans les plus brefs délais.
               </p>
+              {reference && (
+                <p className="font-sans text-xs text-gris-noble mb-6">
+                  Référence : <span className="text-or">{reference}</span>
+                </p>
+              )}
               <button
-                onClick={() => setIsSubmitted(false)}
+                onClick={handleReset}
                 className="font-sans text-sm text-or hover:text-or-clair transition-colors"
               >
                 Envoyer un autre message
@@ -166,6 +243,14 @@ export function PropertyContact({ property }: PropertyContactProps) {
               <h3 className="font-serif text-xl text-ivoire mb-6">
                 Demander des informations
               </h3>
+
+              {/* Message d'erreur API */}
+              {apiError && (
+                <div className="flex items-start gap-3 p-4 mb-4 bg-red-500/10 border border-red-500/20">
+                  <AlertCircle size={18} className="text-red-500 flex-shrink-0 mt-0.5" />
+                  <p className="font-sans text-xs text-red-400">{apiError}</p>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Nom et prénom */}

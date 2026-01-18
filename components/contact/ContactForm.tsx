@@ -7,7 +7,7 @@ import { Select } from "@/components/ui/Select";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Button } from "@/components/ui/Button";
 import { isValidEmail, isValidPhone } from "@/lib/utils";
-import { User, Mail, Phone, MessageSquare, CheckCircle, Send } from "lucide-react";
+import { User, Mail, Phone, MessageSquare, CheckCircle, Send, AlertCircle } from "lucide-react";
 
 interface FormData {
   firstName: string;
@@ -29,6 +29,17 @@ interface FormErrors {
   consent?: string;
 }
 
+// Type de réponse API (correspond à ApiResponse<T> dans types/index.ts)
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
+  data?: {
+    inquiry_type: string;
+    reference: string;
+  };
+}
+
 const subjectOptions = [
   { value: "achat", label: "Achat d'un bien" },
   { value: "vente", label: "Vente de mon bien" },
@@ -38,6 +49,9 @@ const subjectOptions = [
   { value: "renovation", label: "Projet de rénovation" },
   { value: "autre", label: "Autre demande" },
 ];
+
+// URL de l'API (à configurer via variable d'environnement)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -53,6 +67,8 @@ export function ContactForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [reference, setReference] = useState<string | null>(null);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -95,30 +111,65 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setApiError(null);
 
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-    // Simulation d'envoi (à remplacer par l'appel API réel)
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    setIsSuccess(true);
-
-    // Reset form après succès
-    setTimeout(() => {
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-        consent: false,
+    try {
+      // Appel API réel
+      const response = await fetch(`${API_URL}/api/mail/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          subject: subjectOptions.find(opt => opt.value === formData.subject)?.label || formData.subject,
+          message: formData.message,
+          consent: formData.consent,
+        }),
       });
-      setIsSuccess(false);
-    }, 5000);
+
+      const result: ApiResponse = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || result.message || "Une erreur est survenue");
+      }
+
+      // Succès
+      setReference(result.data?.reference || null);
+      setIsSuccess(true);
+
+      // Reset form après 5 secondes
+      setTimeout(() => {
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+          consent: false,
+        });
+        setIsSuccess(false);
+        setReference(null);
+      }, 5000);
+
+    } catch (error) {
+      console.error("Erreur lors de l'envoi:", error);
+      setApiError(
+        error instanceof Error 
+          ? error.message 
+          : "Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -136,6 +187,11 @@ export function ContactForm() {
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+
+    // Clear API error on change
+    if (apiError) {
+      setApiError(null);
+    }
   };
 
   if (isSuccess) {
@@ -151,12 +207,25 @@ export function ContactForm() {
           Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais,
           généralement sous 24 heures.
         </p>
+        {reference && (
+          <p className="font-sans text-xs text-gris-noble mt-4">
+            Référence : <span className="text-or">{reference}</span>
+          </p>
+        )}
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Message d'erreur API */}
+      {apiError && (
+        <div className="flex items-start gap-3 p-4 bg-red-500/10 border border-red-500/20">
+          <AlertCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
+          <p className="font-sans text-sm text-red-400">{apiError}</p>
+        </div>
+      )}
+
       {/* Nom & Prénom */}
       <div className="grid md:grid-cols-2 gap-6">
         <Input
