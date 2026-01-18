@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CookieConsentWrapper } from "@/components/cookies";
 
 export const metadata: Metadata = {
   title: "JS Property — Immobilier de Prestige sur la Côte d'Azur",
   description:
-    "Spécialiste de l'acquisition, la réhabilitation et la vente de biens immobiliers d'exception sur la French Riviera. Plus de 10 ans d'expérience.",
+    "Spécialiste de l'acquisition, la réhabilitation et la vente de biens immobiliers d'exception sur la French Riviera. Plus de 15 ans d'expérience.",
   keywords: [
     "immobilier luxe",
     "Côte d'Azur",
@@ -42,17 +43,18 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
           rel="stylesheet"
         />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossOrigin=""
-        />
       </head>
       <body className="font-sans antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        {/* 
+          CookieConsentWrapper englobe tout le contenu.
+          Il fournit le contexte et affiche automatiquement 
+          le bandeau et le panneau de préférences.
+        */}
+        <CookieConsentWrapper>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </CookieConsentWrapper>
       </body>
     </html>
   );

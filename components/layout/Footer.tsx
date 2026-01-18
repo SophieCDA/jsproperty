@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { MapPin, Phone, Mail, Instagram, Linkedin } from "lucide-react";
+import { CookieSettingsButton } from "@/components/cookies";
 
 const footerLinks = {
   navigation: [
@@ -42,17 +43,33 @@ export function Footer() {
             <p className="font-sans text-sm font-light text-gris-noble leading-relaxed mb-6">
               Spécialiste de l&apos;immobilier de prestige sur la Côte
               d&apos;Azur. Acquisition, réhabilitation et vente de biens
-              d&apos;exception depuis plus de 10 ans.
+              d&apos;exception depuis plus de 15 ans.
             </p>
+            {/* Social Links */}
             <div className="flex gap-3">
               <a
-                href="https://www.instagram.com/j.sproperty/"
+                href="https://instagram.com/jsproperty"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-or hover:bg-or/10 transition-all"
+                className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-or hover:bg-or/10 transition-all group"
                 aria-label="Instagram"
               >
-                <Instagram size={18} className="text-gris-noble" />
+                <Instagram
+                  size={18}
+                  className="text-gris-noble group-hover:text-or transition-colors"
+                />
+              </a>
+              <a
+                href="https://linkedin.com/company/jsproperty"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-or hover:bg-or/10 transition-all group"
+                aria-label="LinkedIn"
+              >
+                <Linkedin
+                  size={18}
+                  className="text-gris-noble group-hover:text-or transition-colors"
+                />
               </a>
             </div>
           </div>
@@ -136,13 +153,27 @@ export function Footer() {
           <span className="font-sans text-xs font-light text-gris-noble">
             © {currentYear} JS Property — Tous droits réservés
           </span>
-          <div className="flex gap-6">
+          
+          {/* Legal links + Cookie button */}
+          <div className="flex flex-wrap justify-center gap-6">
             <Link
-              href="https://shebuildsapps.fr"
+              href="/mentions-legales"
               className="font-sans text-xs font-light text-gris-noble hover:text-or transition-colors"
             >
-              Développé par She Builds Apps
+              Mentions légales
             </Link>
+            <Link
+              href="/confidentialite"
+              className="font-sans text-xs font-light text-gris-noble hover:text-or transition-colors"
+            >
+              Politique de confidentialité
+            </Link>
+            {/* 
+              ✨ NOUVEAU : Bouton pour gérer les cookies
+              Le composant CookieSettingsButton utilise le contexte 
+              pour ouvrir le panneau de préférences.
+            */}
+            <CookieSettingsButton />
           </div>
         </div>
       </div>
