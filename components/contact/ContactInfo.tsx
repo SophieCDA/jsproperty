@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Phone, Mail, Clock, Instagram, Linkedin, ArrowUpRight } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 const contactDetails = [

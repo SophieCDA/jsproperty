@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Phone, Mail, Instagram, Linkedin } from "lucide-react";
+import { MapPin, Phone, Mail, Instagram } from "lucide-react";
 import { CookieSettingsButton } from "@/components/cookies";
 
 const footerLinks = {
@@ -55,18 +55,6 @@ export function Footer() {
                 aria-label="Instagram"
               >
                 <Instagram
-                  size={18}
-                  className="text-gris-noble group-hover:text-or transition-colors"
-                />
-              </a>
-              <a
-                href="https://linkedin.com/company/jsproperty"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-or hover:bg-or/10 transition-all group"
-                aria-label="LinkedIn"
-              >
-                <Linkedin
                   size={18}
                   className="text-gris-noble group-hover:text-or transition-colors"
                 />
