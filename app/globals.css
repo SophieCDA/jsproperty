@@ -1,6 +1,7 @@
 @import "tailwindcss";
 /* Leaflet CSS */
 @import "leaflet/dist/leaflet.css";
+@import './biens/biens.css';
 
 /* ==================== THEME INLINE ==================== */
 @theme inline {

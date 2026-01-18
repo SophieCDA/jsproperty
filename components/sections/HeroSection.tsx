@@ -77,7 +77,7 @@ export function HeroSection() {
         >
           Acquisition, réhabilitation et vente de biens d&apos;exception.
           <br className="hidden md:block" />
-          Plus de 15 ans d&apos;expertise au service de votre patrimoine.
+          Plus de 10 ans d&apos;expertise au service de votre patrimoine.
         </p>
 
         {/* CTA Buttons */}

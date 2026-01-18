@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { PropertyAvailability } from "@/types";
 
 // ==================== CLASS NAME UTILITY ====================
 
@@ -21,9 +22,17 @@ export function formatSurface(surface: number): string {
   return `${surface} m²`;
 }
 
+export function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 // ==================== STATUS UTILITIES ====================
 
-export function getStatusLabel(status: string): string {
+export function getStatusLabel(status: string | PropertyAvailability): string {
   const labels: Record<string, string> = {
     disponible: "Disponible",
     realise: "Réalisé",
@@ -41,6 +50,28 @@ export function getStatusColor(status: string): string {
   return colors[status] || "bg-gris-noble text-ivoire";
 }
 
+// ==================== TEXT UTILITIES ====================
+
+export function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + "...";
+}
+
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+}
+
+export function calculateReadingTime(text: string): number {
+  const wordsPerMinute = 200;
+  const words = text.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
 // ==================== SCROLL UTILITIES ====================
 
 export function scrollToElement(elementId: string): void {
@@ -48,6 +79,33 @@ export function scrollToElement(elementId: string): void {
   if (element) {
     element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+}
+
+// ==================== DEBOUNCE UTILITY ====================
+
+export function debounce<T extends (...args: unknown[]) => unknown>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout | null = null;
+
+  return function executedFunction(...args: Parameters<T>) {
+    const later = () => {
+      timeout = null;
+      func(...args);
+    };
+
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// ==================== ENVIRONMENT UTILITIES ====================
+
+export function isClient(): boolean {
+  return typeof window !== "undefined";
 }
 
 // ==================== ANIMATION UTILITIES ====================

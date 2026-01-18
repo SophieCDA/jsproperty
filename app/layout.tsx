@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 export const metadata: Metadata = {
   title: "JS Property — Immobilier de Prestige sur la Côte d'Azur",
   description:
-    "Spécialiste de l'acquisition, la réhabilitation et la vente de biens immobiliers d'exception sur la French Riviera. Plus de 15 ans d'expérience.",
+    "Spécialiste de l'acquisition, la réhabilitation et la vente de biens immobiliers d'exception sur la French Riviera. Plus de 10 ans d'expérience.",
   keywords: [
     "immobilier luxe",
     "Côte d'Azur",
@@ -41,6 +41,12 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
           rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossOrigin=""
         />
       </head>
       <body className="font-sans antialiased">

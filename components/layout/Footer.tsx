@@ -42,7 +42,7 @@ export function Footer() {
             <p className="font-sans text-sm font-light text-gris-noble leading-relaxed mb-6">
               Spécialiste de l&apos;immobilier de prestige sur la Côte
               d&apos;Azur. Acquisition, réhabilitation et vente de biens
-              d&apos;exception depuis plus de 15 ans.
+              d&apos;exception depuis plus de 10 ans.
             </p>
             <div className="flex gap-3">
               <a
@@ -147,16 +147,10 @@ export function Footer() {
           </span>
           <div className="flex gap-6">
             <Link
-              href="/mentions-legales"
+              href="https://shebuildsapps.fr"
               className="font-sans text-xs font-light text-gris-noble hover:text-or transition-colors"
             >
-              Mentions légales
-            </Link>
-            <Link
-              href="/confidentialite"
-              className="font-sans text-xs font-light text-gris-noble hover:text-or transition-colors"
-            >
-              Politique de confidentialité
+              Développé par She Builds Apps
             </Link>
           </div>
         </div>
