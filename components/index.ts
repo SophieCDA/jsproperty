@@ -25,3 +25,10 @@ export { PropertiesSection } from "./sections/PropertiesSection";
 export { MapPreviewSection } from "./sections/MapPreviewSection";
 export { CTASection } from "./sections/CTASection";
 export { QuoteSection } from "./sections/QuoteSection";
+
+export {
+    ServiceHero,
+    ServiceProcess,
+    ServiceFeatures,
+    ServiceCTA,
+  } from "./services";
