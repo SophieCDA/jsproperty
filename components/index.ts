@@ -9,6 +9,13 @@ export { SectionTitle, Emphasis } from "./ui/SectionTitle";
 
 // Property Components
 export { PropertyCard } from "./property/PropertyCard";
+export { PropertyHero } from "./property/PropertyHero";
+export { PropertyGallery } from "./property/PropertyGallery";
+export { PropertyDetails } from "./property/PropertyDetails";
+export { PropertyFeatures } from "./property/PropertyFeatures";
+export { PropertyLocation } from "./property/PropertyLocation";
+export { PropertyContact } from "./property/PropertyContact";
+export { PropertySimilar } from "./property/PropertySimilar";
 
 // Section Components
 export { HeroSection } from "./sections/HeroSection";
