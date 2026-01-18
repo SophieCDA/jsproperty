@@ -355,16 +355,16 @@ export const properties: Property[] = [
     isRealisation: true,
     type: "appartement",
     images: {
-      main: "/images/properties/nice-peroliere-1-1.jpg",
+      main: "/images/properties/nice-peroliere-1-1.png",
       gallery: [
-        "/images/properties/nice-peroliere-1-2.jpg",
-        "/images/properties/nice-peroliere-1-3.jpg",
-        "/images/properties/nice-peroliere-1-4.jpg",
-        "/images/properties/nice-peroliere-1-5.jpg",
-        "/images/properties/nice-peroliere-1-6.jpg",
-        "/images/properties/nice-peroliere-1-7.jpg",
-        "/images/properties/nice-peroliere-1-8.jpg",
-        "/images/properties/nice-peroliere-1-9.jpg"
+        "/images/properties/nice-peroliere-1-2.png",
+        "/images/properties/nice-peroliere-1-3.png",
+        "/images/properties/nice-peroliere-1-4.png",
+        "/images/properties/nice-peroliere-1-5.png",
+        "/images/properties/nice-peroliere-1-6.png",
+        "/images/properties/nice-peroliere-1-7.png",
+        "/images/properties/nice-peroliere-1-8.png",
+        "/images/properties/nice-peroliere-1-9.png"
       ],
     },
     description: "Somptueux studio type 2P situé dans la vieille ville de Nice complètement réhabilité, à quelques mètres de la Place Garibaldi. 4ème étage avec ascenseur.",
@@ -394,15 +394,15 @@ export const properties: Property[] = [
     isRealisation: true,
     type: "appartement",
     images: {
-      main: "/images/properties/nice-peroliere-2-1.jpg",
+      main: "/images/properties/nice-peroliere-2-1.png",
       gallery: [
-        "/images/properties/nice-peroliere-2-2.jpg",
-        "/images/properties/nice-peroliere-2-3.jpg",
-        "/images/properties/nice-peroliere-2-4.jpg",
-        "/images/properties/nice-peroliere-2-5.jpg",
-        "/images/properties/nice-peroliere-2-6.jpg",
-        "/images/properties/nice-peroliere-2-7.jpg",
-        "/images/properties/nice-peroliere-2-8.jpg"
+        "/images/properties/nice-peroliere-2-2.png",
+        "/images/properties/nice-peroliere-2-3.png",
+        "/images/properties/nice-peroliere-2-4.png",
+        "/images/properties/nice-peroliere-2-5.png",
+        "/images/properties/nice-peroliere-2-6.png",
+        "/images/properties/nice-peroliere-2-7.png",
+        "/images/properties/nice-peroliere-2-8.png"
       ],
     },
     description: "Somptueux studio type 2P situé dans la vieille ville de Nice complètement réhabilité, à quelques mètres de la Place Garibaldi et des plages. 4ème étage avec ascenseur.",
@@ -634,11 +634,11 @@ export const properties: Property[] = [
     isRealisation: true,
     type: "appartement",
     images: {
-      main: "/images/properties/nice-coulee-verte-jean-jaures.jpg",
+      main: "/images/properties/nice-coulee-verte-jean-jaures.png",
       gallery: [
-        "/images/properties/nice-coulee-verte-jean-jaures2.jpg",
-        "/images/properties/nice-coulee-verte-jean-jaures3.jpg",
-        "/images/properties/nice-coulee-verte-jean-jaures4.jpg"
+        "/images/properties/nice-coulee-verte-jean-jaures2.png",
+        "/images/properties/nice-coulee-verte-jean-jaures3.png",
+        "/images/properties/nice-coulee-verte-jean-jaures4.png"
       ],
     },
     description: "Coulée verte, Boulevard Jean Jaurès, appartement de type quatre pièces au troisième étage d'un immeuble en bon état. 87m² habitables. Séjour exposition plein ouest avec balcon avec vue panoramique sur la coulée verte et les collines, composé d'une entrée, d'un séjour avec possibilité d'ouverture sur une chambre, deux chambres dont une avec grenier/mezzanine, une cuisine indépendante.",
