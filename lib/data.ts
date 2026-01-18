@@ -12,7 +12,7 @@ export const navItems: NavItem[] = [
 // ==================== CREDENTIALS DATA ====================
 
 export const credentials: Credential[] = [
-  { value: "15", label: "Années d'expérience", suffix: "+" },
+  { value: "10", label: "Années d'expérience", suffix: "+" },
   { value: "50", label: "Opérations réalisées", suffix: "+" },
   { value: "24", label: "Offre d'achat", suffix: "h" },
   { value: "100", label: "Fonds propres", suffix: "%" },
@@ -357,9 +357,9 @@ export const properties: Property[] = [
     images: {
       main: "/images/properties/nice-peroliere-1-1.png",
       gallery: [
-        "/images/properties/nice-peroliere-1-2.png",
-        "/images/properties/nice-peroliere-1-3.png",
-        "/images/properties/nice-peroliere-1-4.png",
+        "/images/properties/nice-peroliere-1-2.jpg",
+        "/images/properties/nice-peroliere-1-3.jpg",
+        "/images/properties/nice-peroliere-1-4.jpg",
         "/images/properties/nice-peroliere-1-5.png",
         "/images/properties/nice-peroliere-1-6.png",
         "/images/properties/nice-peroliere-1-7.png",
@@ -396,7 +396,7 @@ export const properties: Property[] = [
     images: {
       main: "/images/properties/nice-peroliere-2-1.png",
       gallery: [
-        "/images/properties/nice-peroliere-2-2.png",
+        "/images/properties/nice-peroliere-2-2.jpg",
         "/images/properties/nice-peroliere-2-3.png",
         "/images/properties/nice-peroliere-2-4.png",
         "/images/properties/nice-peroliere-2-5.png",

@@ -111,7 +111,7 @@ export function RealisationsHero({ totalRealisations, soldCount }: RealisationsH
               <div className="w-px h-12 bg-white/10" />
               <div>
                 <span className="block font-serif text-4xl text-ivoire">
-                  15+
+                  10+
                 </span>
                 <span className="font-sans text-xs uppercase tracking-[0.2em] text-gris-noble">
                   Années d'expérience
